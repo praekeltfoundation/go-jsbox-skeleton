@@ -1,0 +1,23 @@
+{
+  "name": "go-jsbox-skeleton",
+  "version": "0.2.0",
+  "description": "Skeleton for a vumi javascript sandbox app",
+  "main": "lib/app.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/praekelt/go-jsbox-skeleton.git"
+  },
+  "keywords": [
+    "vumi",
+    "sandbox"
+  ],
+  "author": "Praekelt Foundation",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/praekelt/go-jsbox-skeleton/issues"
+  },
+  "homepage": "https://github.com/praekelt/go-jsbox-skeleton"
+}
