@@ -66,6 +66,7 @@ describe("app", function() {
                             'Thanks, cheers!'
                         ].join('\n')
                     })
+                    .check.reply.ends_session()
                     .run();
             });
         });
