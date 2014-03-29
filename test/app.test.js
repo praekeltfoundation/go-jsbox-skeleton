@@ -62,9 +62,7 @@ describe("app", function() {
                     .input('2')
                     .check.interaction({
                         state: 'states:end',
-                        reply: [
-                            'Thanks, cheers!'
-                        ].join('\n')
+                        reply: 'Thanks, cheers!'
                     })
                     .check.reply.ends_session()
                     .run();
