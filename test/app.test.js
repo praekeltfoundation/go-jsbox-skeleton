@@ -61,7 +61,7 @@ describe("app", function() {
                     .setup.user.state('states:start')
                     .input('2')
                     .check.interaction({
-                        state: 'states:start',
+                        state: 'states:end',
                         reply: [
                             'Thanks, cheers!'
                         ].join('\n')
