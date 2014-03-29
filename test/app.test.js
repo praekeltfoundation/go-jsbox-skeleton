@@ -61,11 +61,10 @@ describe("app", function() {
                     .setup.user.state('states:start')
                     .input('2')
                     .check.interaction({
-                        state: 'states:start',
-                        reply: [
-                            'Thanks, cheers!'
-                        ].join('\n')
+                        state: 'states:end',
+                        reply: 'Thanks, cheers!'
                     })
+                    .check.reply.ends_session()
                     .run();
             });
         });
