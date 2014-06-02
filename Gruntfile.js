@@ -40,7 +40,10 @@ module.exports = function (grunt) {
 
         watch: {
             src: {
-                files: ['<%= paths.src.all %>'],
+                files: [
+                    '<%= paths.src.all %>',
+                    '<%= paths.test %>'
+                ],
                 tasks: ['default'],
                 options: {
                     atBegin: true
