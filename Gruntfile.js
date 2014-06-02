@@ -52,6 +52,14 @@ module.exports = function (grunt) {
         },
 
         concat: {
+            options: {
+                banner: [
+                    '// WARNING: This is a generated file.',
+                    '//          If you edit it you will be sad.',
+                    '//          Edit src/app.js instead.',
+                    '\n' // Newline between banner and content.
+                ].join('\n')
+            },
             prd: {
                 src: ['<%= paths.src.prd %>'],
                 dest: '<%= paths.dest.prd %>'
