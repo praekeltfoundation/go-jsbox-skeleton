@@ -23,7 +23,7 @@ describe("app", function() {
         });
 
         describe("when the user starts a session", function() {
-            it("should ask them want they want to do", function() {
+            it("should ask them what they want to do", function() {
                 return tester
                     .start()
                     .check.interaction({
