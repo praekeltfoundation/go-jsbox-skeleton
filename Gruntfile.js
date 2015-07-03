@@ -8,7 +8,8 @@ module.exports = function (grunt) {
         paths: {
             src: {
                 app: [
-                    'src/app.js'
+                    'src/api.js',
+                    'src/example/index.js'
                 ],
                 prd: [
                     'src/index.js',

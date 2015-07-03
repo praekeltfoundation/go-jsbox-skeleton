@@ -5,42 +5,54 @@
 var go = {};
 go;
 
-go.app = function() {
-    var vumigo = require('vumigo_v02');
-    var App = vumigo.App;
-    var Choice = vumigo.states.Choice;
-    var ChoiceState = vumigo.states.ChoiceState;
-    var EndState = vumigo.states.EndState;
-
-    var GoApp = App.extend(function(self) {
-        App.call(self, 'states:start');
-
-        self.states.add('states:start', function(name) {
-            return new ChoiceState(name, {
-                question: 'Hi there! What do you want to do?',
-
-                choices: [
-                    new Choice('states:start', 'Show this menu again'),
-                    new Choice('states:end', 'Exit')],
-
-                next: function(choice) {
-                    return choice.value;
-                }
+function Stellar() {
+    /**
+     * Set up authentication states
+     *
+     * opts.app - InteractionMachine
+     * opts.initial_state - State we start from
+     * opts.success_state - state to go to on succcessful authentication
+     * opts.failure_state - state to move to on authentication failure
+     */
+    function register_authentication_states(opts) {
+        var app = opts.app;
+        app.states.add(
+            opts.initial_state,
+            function(name) {
+                return new ChoiceState(
+                    n
             });
-        });
-
-        self.states.add('states:end', function(name) {
-            return new EndState(name, {
-                text: 'Thanks, cheers!',
-                next: 'states:start'
-            });
-        });
-    });
+    }
 
     return {
-        GoApp: GoApp
+        register_authentication_states: register_authentication_states
     };
-}();
+}
+
+module.exports = new Stellar();
+
+var vumigo = require('vumigo_v02');
+var stallar = require('../');
+
+
+if (typeof api === "undefined") {
+    // testing hook (supplies api when it is not passed in by the real sandbox)
+    var api = this.api = new vumigo.dummy_api.DummyApi();
+}
+
+var GoApp = vumigo.App.extend(function(self) {
+    App.call(self, 'states:start');
+
+    stellar.register_authentication_states({
+        app: self,
+        initial_state: 'states:start',
+        success_state: 'auth_success',
+        failure_state: 'auth_fail'
+    });
+});
+
+
+var im = new vumigo.InteractionMachine(api, new GoApp());
 
 go.init = function() {
     var vumigo = require('vumigo_v02');
