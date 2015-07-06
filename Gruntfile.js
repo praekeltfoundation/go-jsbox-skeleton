@@ -9,6 +9,7 @@ module.exports = function (grunt) {
             src: {
                 app: [
                     'src/api.js',
+                    'src/operations/make_payment.js',
                     //'src/test.js'
                 ],
                 prd: [
