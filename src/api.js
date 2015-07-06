@@ -44,7 +44,7 @@ StellarState = State.extend(function(self, name, opts) {
                     question: 'Enter the amount you wish to send',
                     fail_message: 'Please enter a numerical amount',
                     validate: function(v) {
-                        return /\d+/.test(v);
+                        return /^\d+$/.test(v);
                     },
                     result_variable: 'amount'
                 },
@@ -53,7 +53,7 @@ StellarState = State.extend(function(self, name, opts) {
                     fail_message: 'That is not a valid pin, it needs to be numeric',
                     // TODO: validate pins
                     validate: function(v) {
-                        return /\d+/.test;
+                        return /^\d+$/.test;
                     },
                     result_variable: 'pin'
                 },
@@ -126,7 +126,6 @@ StellarState = State.extend(function(self, name, opts) {
 
     self.on('state:input', function(e) {
         var content = (e.content || '').trim();
-        console.log('content '+content);
         self.metadata.input = content;
     });
 

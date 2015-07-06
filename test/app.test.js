@@ -62,5 +62,14 @@ describe("app", function() {
                 .check.reply('Enter your wallet pin')
                 .run();
         });
+
+        it("fail enter amount", function() {
+            return tester
+                .inputs(null, '0761234567', '10a')
+                .check.reply('Please enter a numerical amount')
+                .run();
+        });
+
+
     });
 });
