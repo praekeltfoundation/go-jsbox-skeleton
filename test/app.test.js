@@ -1,72 +1,66 @@
 var vumigo = require('vumigo_v02');
-var fixtures = require('./fixtures');
 var AppTester = vumigo.AppTester;
 
 
 describe("app", function() {
-    describe("GoApp", function() {
+    describe("StellarApi", function() {
         var app;
         var tester;
 
         beforeEach(function() {
-            app = new go.app.GoApp();
-
+            var App = vumigo.App.extend(function(self) {
+                vumigo.App.call(self, 'states:start');
+                self.init = function() {
+                };
+                self.states.add('states:start', function(name) {
+                    return new StellarState(name, {
+                        im: self.im,
+                        operation: 'make_payment'
+                    });
+                });
+            });
+            app = new App();
             tester = new AppTester(app);
-
-            tester
-                .setup.config.app({
+            tester.setup.config.app({
                     name: 'test_app'
-                })
-                .setup(function(api) {
-                    fixtures().forEach(api.http.fixtures.add);
                 });
         });
 
-        describe("when the user starts a session", function() {
-            it("should ask them what they want to do", function() {
-                return tester
-                    .start()
-                    .check.interaction({
-                        state: 'states:start',
-                        reply: [
-                            'Hi there! What do you want to do?',
-                            '1. Show this menu again',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
-            });
+        it("Initial state", function() {
+            return tester
+                .check.interaction({
+                    state: 'states:start',
+                    reply: 'Enter the mobile number of recipient'
+                })
+                .run();
         });
 
-        describe("when the user asks to see the menu again", function() {
-            it("should show the menu again", function() {
-                return tester
-                    .setup.user.state('states:start')
-                    .input('1')
-                    .check.interaction({
-                        state: 'states:start',
-                        reply: [
-                            'Hi there! What do you want to do?',
-                            '1. Show this menu again',
-                            '2. Exit'
-                        ].join('\n')
-                    })
-                    .run();
-            });
+        it("Check mobile number verification", function() {
+            return tester
+                .input('sdf')
+                .check.interaction({
+                    state: 'states:start',
+                    reply: 'That is not a valid mobile number, please try again'
+                })
+                .run();
+
         });
 
-        describe("when the user asks to exit", function() {
-            it("should say thank you and end the session", function() {
-                return tester
-                    .setup.user.state('states:start')
-                    .input('2')
-                    .check.interaction({
-                        state: 'states:end',
-                        reply: 'Thanks, cheers!'
-                    })
-                    .check.reply.ends_session()
-                    .run();
-            });
+        it("Input mobile number", function() {
+            return tester
+                .input('0761234567')
+                .check.interaction({
+                    state: 'states:start',
+                    reply: 'Enter the amount you wish to send'
+                })
+                .run();
+        });
+
+        it("Enter amount", function() {
+            return tester
+                .inputs(null, '0761234567', '10')
+                .check.reply('Enter your wallet pin')
+                .run();
         });
     });
 });
