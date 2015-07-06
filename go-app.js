@@ -81,7 +81,10 @@ StellarState = State.extend(function(self, name, opts) {
                         .then(function(result) {
                             // DO STUFF
                             console.log(result);
+                        }, 
+                        function(error) {
                         });
+                    return 'Payment pending, we will sms you when it completes';
                 }
             ]);
         self.operations = {
@@ -125,7 +128,7 @@ StellarState = State.extend(function(self, name, opts) {
                 } 
                 // a callback that should do things
                 else {
-                    question(operation_data);
+                    self._text = question(operation_data);
                 }
             }
         };

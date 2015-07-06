@@ -70,11 +70,8 @@ StellarState = State.extend(function(self, name, opts) {
                                 frommisdn: opts.im.user_addr,
                                 tomsisdn: operation_data.to_msisdn
                             }
-                        })
-                        .then(function(result) {
-                            // DO STUFF
-                            console.log(result);
                         });
+                    return 'Payment pending, we will sms you when it completes';
                 }
             ]);
         self.operations = {
@@ -118,7 +115,7 @@ StellarState = State.extend(function(self, name, opts) {
                 } 
                 // a callback that should do things
                 else {
-                    question(operation_data);
+                    self._text = question(operation_data);
                 }
             }
         };
