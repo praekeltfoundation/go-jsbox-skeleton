@@ -20,7 +20,7 @@ go.app = function() {
                 question: 'Hi there! What do you want to do?',
 
                 choices: [
-                    new Choice('states:start', 'Show this menu again'),
+                    new Choice('states:start', 'Search for music'),
                     new Choice('states:end', 'Exit')],
 
                 next: function(choice) {
@@ -31,7 +31,7 @@ go.app = function() {
 
         self.states.add('states:end', function(name) {
             return new EndState(name, {
-                text: 'Thanks, cheers!',
+                text: 'As long as it\'s good music, that\'s what\'s important',
                 next: 'states:start'
             });
         });

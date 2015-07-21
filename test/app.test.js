@@ -30,7 +30,7 @@ describe("app", function() {
                         state: 'states:start',
                         reply: [
                             'Hi there! What do you want to do?',
-                            '1. Show this menu again',
+                            '1. Search for music',
                             '2. Exit'
                         ].join('\n')
                     })
@@ -47,7 +47,7 @@ describe("app", function() {
                         state: 'states:start',
                         reply: [
                             'Hi there! What do you want to do?',
-                            '1. Show this menu again',
+                            '1. Search for music',
                             '2. Exit'
                         ].join('\n')
                     })
@@ -62,7 +62,7 @@ describe("app", function() {
                     .input('2')
                     .check.interaction({
                         state: 'states:end',
-                        reply: 'Thanks, cheers!'
+                        reply: 'As long as it\'s good music, that\'s what\'s important'
                     })
                     .check.reply.ends_session()
                     .run();
